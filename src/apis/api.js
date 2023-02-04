@@ -1,10 +1,11 @@
 const {getDoc} = require("../utils/utils");
+const {wrap} = require("../middleware");
 exports.apis=(app)=>{
-    app.get("/test",async(req,res,next)=>{
-        res.send("hamlet");
-    });
+    app.get("/test",wrap(async(req,res,next)=>{
+        res.send({"data":"hamlet"});
+    }));
 
-    app.post("/getFb",async(req,res,next)=>{
+    app.post("/getFb",wrap(async(req,res,next)=>{
         res.send(await getDoc(req.body.path));
-    });
+    }));
 }

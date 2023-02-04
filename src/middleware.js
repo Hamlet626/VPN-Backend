@@ -6,9 +6,13 @@ const apiError=(err, req, res, next)=> {
     res.status(402).send({error:err.message,stack:err.stack});
 }
 exports.apiError=apiError;
+const wrap = exports.wrap=fn => (...args) => Promise
+    .resolve(fn(...args))
+    .catch(args[2])
+
 
 const auth=(req,res,next)=>{
-    if (req.headers.wckey!==process.env.AUTH_KEY)
+    if (req.headers.authkey!==process.env.AUTH_KEY)
         return res.status(403).json({ error: 'Wrong authentication key!' });
     next();
 }

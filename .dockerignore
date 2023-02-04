@@ -4,6 +4,7 @@
 .idea
 # Environment variables
 .env
+firebase-service-account.json
 # Dependency directories
 node_modules/
 # Node Version Manager
